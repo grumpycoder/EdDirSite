@@ -14,6 +14,7 @@ namespace EdDirSites.Web.Controllers
         public ActionResult SiteDetail(string systemcode, string schoolcode)
         {
             ViewBag.System = systemcode + "/" + schoolcode;
+
             return View("Index");
         }
 
