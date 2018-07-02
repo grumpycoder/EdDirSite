@@ -1,4 +1,5 @@
 using EdDirSites.Core.Data;
+using EdDirSites.Core.Repositories;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(EdDirSites.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(EdDirSites.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -67,8 +68,8 @@ namespace EdDirSites.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<EdContext>().ToSelf().InRequestScope();
-            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
-            //kernel.Bind<IFileSpecificationRepository>().To<FileSpecificationRepository>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<ISiteRepository>().To<SiteRepository>();
             //kernel.Bind<IReportRepository>().To<ReportRepository>();
             //kernel.Bind<ISubmissionRepository>().To<SubmissionRepository>();
             //kernel.Bind<IWorkItemRepository>().To<WorkItemRepository>();

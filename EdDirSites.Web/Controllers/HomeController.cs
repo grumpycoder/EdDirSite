@@ -1,39 +1,42 @@
-﻿using System.Data.Entity;
+﻿using EdDirSites.Core.Repositories;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using EdDirSites.Core.Data;
 
 namespace EdDirSites.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly EdContext _context;
+        private readonly IUnitOfWork _uow;
 
-        public HomeController(EdContext context)
+        public HomeController(IUnitOfWork uow)
         {
-            _context = context;
+            _uow = uow;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
+            var list = _uow.Sites.GetAll();
             return View();
         }
 
         [Route("{systemcode}/{schoolcode}")]
         public ActionResult SiteDetail(string systemcode, string schoolcode)
         {
-            ViewBag.System = systemcode + "/" + schoolcode;
+            var site = _uow.Sites.GetSite(systemcode, schoolcode);
 
             return View("Index");
         }
 
         [Route("{systemcode}")]
-        public ActionResult SiteList(string systemcode)
+        public async Task<ActionResult> SiteList(string systemcode)
         {
             ViewBag.System = systemcode;
+            var list = await _uow.Sites.GetBySystemAsync(systemcode);
+
             return View("Index");
         }
 
+        [Route("about")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -41,11 +44,5 @@ namespace EdDirSites.Web.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
