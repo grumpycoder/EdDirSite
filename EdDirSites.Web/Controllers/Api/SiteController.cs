@@ -1,6 +1,4 @@
-﻿using EdDirSites.Core.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using EdDirSites.Core.Repositories;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -9,16 +7,16 @@ namespace EdDirSites.Web.Controllers.Api
     [RoutePrefix("api/site")]
     public class SiteController : ApiController
     {
-        private EdContext context;
+        private readonly IUnitOfWork _uow;
 
-        public SiteController()
+        public SiteController(IUnitOfWork uow)
         {
-            context = new EdContext();
+            _uow = uow;
         }
 
         public async Task<object> Get()
         {
-            return Ok(await context.Sites.OrderBy(x => x.Id).Skip(0).Take(100).ToListAsync());
+            return Ok(await _uow.Sites.GetAllAsync());
         }
 
         //[HttpGet, Route("{id:int}")]
@@ -30,15 +28,15 @@ namespace EdDirSites.Web.Controllers.Api
         //}
 
         [HttpGet, Route("{syscode}/{sitecode?}")]
-        public async Task<object> Get(string syscode, string sitecode = null)
+        public async Task<object> Get(string systemcode, string sitecode = null)
         {
             if (!string.IsNullOrEmpty(sitecode))
             {
-                var site = await context.Sites.FirstOrDefaultAsync(x => x.SystemCode.ToString() == syscode && x.SiteCode == sitecode);
+                var site = await _uow.Sites.GetSiteAsync(systemcode, sitecode);
                 return Ok(site);
             }
 
-            var list = await context.Sites.Where(x => x.SystemCode == syscode).ToListAsync();
+            var list = await _uow.Sites.GetBySystemAsync(systemcode);
 
             return Ok(list);
         }

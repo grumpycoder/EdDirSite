@@ -36,14 +36,14 @@ namespace EdDirSites.Core.Repositories
             return await _context.Sites.Where(s => s.SystemCode == systemCode).ToListAsync();
         }
 
-        public Site GetSite(string systemCode, string schoolCode)
+        public Site GetSite(string systemCode, string sitecode)
         {
-            return _context.Sites.FirstOrDefault(s => s.SystemCode == systemCode && s.SiteCode == schoolCode);
+            return _context.Sites.FirstOrDefault(s => s.SystemCode == systemCode && s.SiteCode == sitecode);
         }
 
-        public async Task<Site> GetSiteAsync(string systemCode, string schoolCode)
+        public async Task<Site> GetSiteAsync(string systemCode, string sitecode)
         {
-            return await _context.Sites.FirstOrDefaultAsync(s => s.SystemCode == systemCode && s.SiteCode == schoolCode);
+            return await _context.Sites.FirstOrDefaultAsync(s => s.SystemCode == systemCode && s.SiteCode == sitecode);
         }
 
         public Site GetSiteById(int id)

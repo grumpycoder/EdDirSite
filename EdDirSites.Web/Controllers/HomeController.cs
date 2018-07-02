@@ -19,10 +19,10 @@ namespace EdDirSites.Web.Controllers
             return View();
         }
 
-        [Route("{systemcode}/{schoolcode}")]
-        public ActionResult SiteDetail(string systemcode, string schoolcode)
+        [Route("{systemcode}/{sitecode}")]
+        public ActionResult SiteDetail(string systemcode, string sitecode)
         {
-            var site = _uow.Sites.GetSite(systemcode, schoolcode);
+            var site = _uow.Sites.GetSite(systemcode, sitecode);
 
             return View("Index");
         }
