@@ -34,11 +34,11 @@ namespace EdDirSites.Web.Controllers.Api
         {
             if (!string.IsNullOrEmpty(sitecode))
             {
-                var site = await context.Sites.FirstOrDefaultAsync(x => x.SysCode.ToString() == syscode && x.SiteCode == sitecode);
+                var site = await context.Sites.FirstOrDefaultAsync(x => x.SystemCode.ToString() == syscode && x.SiteCode == sitecode);
                 return Ok(site);
             }
 
-            var list = await context.Sites.Where(x => x.SysCode == syscode).ToListAsync();
+            var list = await context.Sites.Where(x => x.SystemCode == syscode).ToListAsync();
 
             return Ok(list);
         }

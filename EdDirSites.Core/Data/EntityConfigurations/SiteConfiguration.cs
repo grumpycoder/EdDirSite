@@ -9,6 +9,7 @@ namespace EdDirSites.Core.Data.EntityConfigurations
         {
             ToTable("EdDir.Site");
             Property(s => s.Id).HasColumnName("SiteID");
+            Property(s => s.SystemCode).HasColumnName("SysCode");
             Property(s => s.Name).HasColumnName("SiteName");
             Property(s => s.FullName).HasColumnName("SiteLongName");
             //Property(s => s.Name).HasMaxLength(50);
