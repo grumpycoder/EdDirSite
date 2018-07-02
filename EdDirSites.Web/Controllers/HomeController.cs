@@ -1,16 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace EdDirSites.Web.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
+        }
+
+        [Route("{systemcode}/{schoolcode}")]
+        public ActionResult SiteDetail(string systemcode, string schoolcode)
+        {
+            ViewBag.System = systemcode + "/" + schoolcode;
+            return View("Index");
+        }
+
+        [Route("{systemcode}")]
+        public ActionResult SiteList(string systemcode)
+        {
+            ViewBag.System = systemcode;
+            return View("Index");
         }
 
         public ActionResult About()
