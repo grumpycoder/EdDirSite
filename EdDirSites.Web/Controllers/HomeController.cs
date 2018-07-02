@@ -1,11 +1,20 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using EdDirSites.Core.Data;
 
 namespace EdDirSites.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly EdContext _context;
 
-        public ActionResult Index()
+        public HomeController(EdContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<ActionResult> Index()
         {
             return View();
         }
