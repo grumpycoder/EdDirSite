@@ -19,27 +19,20 @@ namespace EdDirSites.Web.Controllers.Api
             return Ok(await _uow.Sites.GetAllAsync());
         }
 
-        //[HttpGet, Route("{id:int}")]
-        //public async Task<object> Get(int id)
-        //{
-        //    var site = await context.Sites.FirstOrDefaultAsync(x => x.Id == id);
-
-        //    return Ok(site);
-        //}
-
-        [HttpGet, Route("{syscode}/{sitecode?}")]
-        public async Task<object> Get(string systemcode, string sitecode = null)
+        [HttpGet, Route("{systemcode}")]
+        public async Task<object> Get(string systemcode)
         {
-            if (!string.IsNullOrEmpty(sitecode))
-            {
-                var site = await _uow.Sites.GetSiteAsync(systemcode, sitecode);
-                return Ok(site);
-            }
-
             var list = await _uow.Sites.GetBySystemAsync(systemcode);
 
             return Ok(list);
         }
 
+
+        [HttpGet, Route("{systemcode}/school/{sitecode}")]
+        public async Task<object> Get(string systemcode, string sitecode)
+        {
+            var site = await _uow.Sites.GetSiteAsync(systemcode, sitecode);
+            return Ok(site);
+        }
     }
 }
