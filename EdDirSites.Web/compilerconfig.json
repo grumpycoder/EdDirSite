@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "css/main.css",
+    "inputFile": "css/main.scss"
+  },
+  {
+    "outputFile": "css/font-awesome.css",
+    "inputFile": "css/font-awesome.scss"
+  },
+  {
+    "outputFile": "css/bootstrap.css",
+    "inputFile": "css/bootstrap.scss"
+  },
+  {
+    "outputFile": "css/bootstrap.css",
+    "inputFile": "css/scss/bootstrap/bootstrap.scss"
+  }
+]
