@@ -28,7 +28,8 @@ namespace EdDirSites.Web.Controllers.Api
         }
 
 
-        [HttpGet, Route("{systemcode}/school/{sitecode}")]
+        //[HttpGet, Route("{systemcode}/school/{sitecode}")]
+        [HttpGet, Route("{systemcode}/{sitecode}")]
         public async Task<object> Get(string systemcode, string sitecode)
         {
             var site = await _uow.Sites.GetSiteAsync(systemcode, sitecode);

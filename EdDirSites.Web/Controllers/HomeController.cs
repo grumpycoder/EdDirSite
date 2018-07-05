@@ -24,7 +24,7 @@ namespace EdDirSites.Web.Controllers
         {
             var site = _uow.Sites.GetSite(systemcode, sitecode);
 
-            return View("Index");
+            return View(site);
         }
 
         [Route("{systemcode}")]
